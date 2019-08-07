@@ -1,1 +1,289 @@
-<Activity x:Class="Main" mva:VisualBasic.Settings="Assembly references and imported namespaces for internal implementation" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mv="clr-namespace:Microsoft.VisualBasic;assembly=Microsoft.VisualBasic" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:sc="clr-namespace:System.Collections;assembly=mscorlib" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data" xmlns:sd1="clr-namespace:System.Diagnostics;assembly=System" xmlns:sd2="clr-namespace:System.Drawing;assembly=System.Drawing" xmlns:si="clr-namespace:System.IO;assembly=mscorlib" xmlns:sl="clr-namespace:System.Linq;assembly=System.Core" xmlns:snm="clr-namespace:System.Net.Mail;assembly=System" xmlns:sx="clr-namespace:System.Xml;assembly=System.Xml" xmlns:sxl="clr-namespace:System.Xml.Linq;assembly=System.Xml.Linq" xmlns:uc="clr-namespace:UiPath.Core;assembly=UiPath.Core" xmlns:uca="clr-namespace:UiPath.Core.Activities;assembly=UiPath.Core.Activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" />
+﻿<Activity mc:Ignorable="sap sap2010 sads" x:Class="Main" mva:VisualBasic.Settings="{x:Null}" sap2010:WorkflowViewState.IdRef="Main_1"
+ xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities"
+ xmlns:av="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+ xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+ xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities"
+ xmlns:s="clr-namespace:System;assembly=mscorlib"
+ xmlns:sads="http://schemas.microsoft.com/netfx/2010/xaml/activities/debugger"
+ xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation"
+ xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation"
+ xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib"
+ xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=mscorlib"
+ xmlns:ui="http://schemas.uipath.com/workflow/activities"
+ xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <TextExpression.NamespacesForImplementation>
+    <sco:Collection x:TypeArguments="x:String">
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>System.Windows.Markup</x:String>
+    </sco:Collection>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <sco:Collection x:TypeArguments="AssemblyReference">
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>PresentationCore</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>System.ServiceModel</AssemblyReference>
+      <AssemblyReference>System.ValueTuple</AssemblyReference>
+      <AssemblyReference>UiPath.Excel</AssemblyReference>
+      <AssemblyReference>UiPath.Mail</AssemblyReference>
+      <AssemblyReference>UiPath.Studio.Plugin.Workflow</AssemblyReference>
+    </sco:Collection>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence DisplayName="シーケンス" sap2010:WorkflowViewState.IdRef="Sequence_1">
+    <StateMachine DisplayName="ステートマシン" sap2010:WorkflowViewState.IdRef="StateMachine_1">
+      <StateMachine.InitialState>
+        <State x:Name="__ReferenceID0" DisplayName="トリガー待ち" sap2010:WorkflowViewState.IdRef="State_1">
+          <State.Transitions>
+            <Transition DisplayName="配置された" sap2010:WorkflowViewState.IdRef="Transition_5">
+              <Transition.Trigger>
+                <ui:MonitorEvents ContinueOnError="{x:Null}" DisplayName="イベントを監視" sap2010:WorkflowViewState.IdRef="MonitorEvents_1" RepeatForever="False">
+                  <ui:MonitorEvents.Handler>
+                    <ActivityAction x:TypeArguments="x:Object">
+                      <ActivityAction.Argument>
+                        <DelegateInArgument x:TypeArguments="x:Object" Name="args" />
+                      </ActivityAction.Argument>
+                      <Sequence DisplayName="イベントハンドラー" sap2010:WorkflowViewState.IdRef="Sequence_2">
+                        <ui:ReadTextFile Content="[trg]" DisplayName="テキストファイルを読み込む" FileName="c:/temp/data.trg" sap2010:WorkflowViewState.IdRef="ReadTextFile_3" />
+                        <ui:MessageBox Caption="{x:Null}" ChosenButton="{x:Null}" Buttons="Ok" DisplayName="メッセージボックス" sap2010:WorkflowViewState.IdRef="MessageBox_2" Text="[&quot;put!&quot;]" TopMost="True" />
+                      </Sequence>
+                    </ActivityAction>
+                  </ui:MonitorEvents.Handler>
+                  <ui:MonitorEvents.Triggers>
+                    <ui:FileChangeTrigger ChangeType="Changed" DisplayName="ファイル変更トリガー" FileName="data.trg" sap2010:WorkflowViewState.IdRef="FileChangeTrigger_1" IncludeSubdirectories="False" NotifyFilters="Size" Path="c:/temp" />
+                  </ui:MonitorEvents.Triggers>
+                </ui:MonitorEvents>
+              </Transition.Trigger>
+              <Transition.To>
+                <State x:Name="__ReferenceID3" DisplayName="データ取得" sap2010:WorkflowViewState.IdRef="State_4">
+                  <State.Entry>
+                    <Sequence DisplayName="シーケンス" sap2010:WorkflowViewState.IdRef="Sequence_4">
+                      <Assign DisplayName="代入" sap2010:WorkflowViewState.IdRef="Assign_2">
+                        <Assign.To>
+                          <OutArgument x:TypeArguments="s:Exception">[BusinessRuleException]</OutArgument>
+                        </Assign.To>
+                        <Assign.Value>
+                          <InArgument x:TypeArguments="s:Exception">[Nothing]</InArgument>
+                        </Assign.Value>
+                      </Assign>
+                      <ui:ReadTextFile Content="[data]" DisplayName="テキストファイルを読み込む" FileName="c:/temp/data.txt" sap2010:WorkflowViewState.IdRef="ReadTextFile_2" />
+                      <If Condition="[&quot;exception&quot;.Equals(data)]" DisplayName="条件分岐" sap2010:WorkflowViewState.IdRef="If_2">
+                        <If.Then>
+                          <Assign DisplayName="代入" sap2010:WorkflowViewState.IdRef="Assign_1">
+                            <Assign.To>
+                              <OutArgument x:TypeArguments="s:Exception">[BusinessRuleException]</OutArgument>
+                            </Assign.To>
+                            <Assign.Value>
+                              <InArgument x:TypeArguments="s:Exception">[new BusinessRuleException("aaa")]</InArgument>
+                            </Assign.Value>
+                          </Assign>
+                        </If.Then>
+                      </If>
+                    </Sequence>
+                  </State.Entry>
+                  <State.Transitions>
+                    <Transition DisplayName="取得できた" sap2010:WorkflowViewState.IdRef="Transition_4" Condition="[BusinessRuleException is Nothing]">
+                      <Transition.To>
+                        <State x:Name="__ReferenceID1" DisplayName="業務処理" sap2010:WorkflowViewState.IdRef="State_3">
+                          <State.Entry>
+                            <ui:MessageBox Caption="{x:Null}" ChosenButton="{x:Null}" Buttons="Ok" DisplayName="メッセージボックス" sap2010:WorkflowViewState.IdRef="MessageBox_3" Text="[&quot;data&quot; + data]" TopMost="True" />
+                          </State.Entry>
+                          <State.Transitions>
+                            <Transition DisplayName="正常終了" sap2010:WorkflowViewState.IdRef="Transition_1" To="{x:Reference __ReferenceID0}" Condition="[BusinessRuleException is Nothing And (&quot;end&quot;.Equals(trg) = false)]" />
+                            <Transition DisplayName="終了フラグ" sap2010:WorkflowViewState.IdRef="Transition_2" Condition="[&quot;end&quot;.Equals(trg)]">
+                              <Transition.To>
+                                <State x:Name="__ReferenceID2" DisplayName="最終ステート" sap2010:WorkflowViewState.IdRef="State_2" IsFinal="True" />
+                              </Transition.To>
+                            </Transition>
+                          </State.Transitions>
+                        </State>
+                      </Transition.To>
+                    </Transition>
+                    <Transition DisplayName="BusinessRuleException" sap2010:WorkflowViewState.IdRef="Transition_6" To="{x:Reference __ReferenceID0}">
+                      <Transition.Action>
+                        <ui:MessageBox Caption="{x:Null}" ChosenButton="{x:Null}" Buttons="Ok" DisplayName="メッセージボックス" sap2010:WorkflowViewState.IdRef="MessageBox_4" Text="[&quot;データ取得で例外発生&quot;]" TopMost="True" />
+                      </Transition.Action>
+                      <Transition.Condition>[BusinessRuleException IsNot Nothing]</Transition.Condition>
+                    </Transition>
+                  </State.Transitions>
+                </State>
+              </Transition.To>
+            </Transition>
+          </State.Transitions>
+        </State>
+      </StateMachine.InitialState>
+      <x:Reference>__ReferenceID0</x:Reference>
+      <x:Reference>__ReferenceID1</x:Reference>
+      <x:Reference>__ReferenceID2</x:Reference>
+      <x:Reference>__ReferenceID3</x:Reference>
+      <StateMachine.Variables>
+        <Variable x:TypeArguments="s:Exception" Name="BusinessRuleException" />
+        <Variable x:TypeArguments="x:String" Name="trg" />
+        <Variable x:TypeArguments="x:String" Name="data" />
+      </StateMachine.Variables>
+    </StateMachine>
+    <sads:DebugSymbol.Symbol>dylWOlxnaXRcVWlQYXRoU3RhdGVNYWNoaW5lU2FtcGxlXE1haW4ueGFtbCU/A5wBDgIBAUAFmgEUAgECQgmPARECASl1GYEBIQIBHn0hfZABAgEcWBGLARkCAQNGEVUkAgErdx133QECASZ6lwF65QECASJ7dnuVAQIBIFoVcCACAQxzbnOSAQIBCYgBLYgBUgIBB4YBGYYB2AECAQVGlAFGmwECATZTFVPnAQIBM0wXTyICASx3sAF3ywECASdbF2IgAgEYYxdjpAECARRkF28cAgENhgGsAYYBxgECAQZTYlNsAgE1U9sBU+QBAgE0TRlNpQECAS9OGU7SAQIBLWBFYE4CARtdRl1dAgEZY15jcAIBF2MwYzgCARVkJWRLAgEOZhttJAIBEE1fTXECATJNMk05AgEwTqwBTsABAgEua0lrawIBE2hKaGECARE=</sads:DebugSymbol.Symbol>
+  </Sequence>
+  <sap2010:WorkflowViewState.ViewStateManager>
+    <sap2010:ViewStateManager>
+      <sap2010:ViewStateData Id="ReadTextFile_3" sap:VirtualizedContainerService.HintSize="314,59" />
+      <sap2010:ViewStateData Id="MessageBox_2" sap:VirtualizedContainerService.HintSize="314,59" />
+      <sap2010:ViewStateData Id="Sequence_2" sap:VirtualizedContainerService.HintSize="336,282">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="FileChangeTrigger_1" sap:VirtualizedContainerService.HintSize="200,40" />
+      <sap2010:ViewStateData Id="MonitorEvents_1" sap:VirtualizedContainerService.HintSize="414,406" />
+      <sap2010:ViewStateData Id="Assign_2" sap:VirtualizedContainerService.HintSize="464,60" />
+      <sap2010:ViewStateData Id="ReadTextFile_2" sap:VirtualizedContainerService.HintSize="464,59" />
+      <sap2010:ViewStateData Id="Assign_1" sap:VirtualizedContainerService.HintSize="242,60" />
+      <sap2010:ViewStateData Id="If_2" sap:VirtualizedContainerService.HintSize="464,208" />
+      <sap2010:ViewStateData Id="Sequence_4" sap:VirtualizedContainerService.HintSize="486,531">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="MessageBox_3" sap:VirtualizedContainerService.HintSize="314,59" />
+      <sap2010:ViewStateData Id="Transition_1" sap:VirtualizedContainerService.HintSize="430,505">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <av:PointCollection x:Key="ConnectorLocation">453,513.9 579.937068528015,513.9 579.937068528015,90 427,90</av:PointCollection>
+            <x:Int32 x:Key="SrcConnectionPointIndex">60</x:Int32>
+            <x:Int32 x:Key="DestConnectionPointIndex">36</x:Int32>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="State_2" sap:VirtualizedContainerService.HintSize="114,61">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <av:Point x:Key="ShapeLocation">43,289.5</av:Point>
+            <av:Size x:Key="ShapeSize">114,61</av:Size>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Transition_2" sap:VirtualizedContainerService.HintSize="430,512">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <av:PointCollection x:Key="ConnectorLocation">267,480 94.3,480 94.3,350.5</av:PointCollection>
+            <x:Int32 x:Key="SrcConnectionPointIndex">37</x:Int32>
+            <x:Int32 x:Key="DestConnectionPointIndex">35</x:Int32>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="State_3" sap:VirtualizedContainerService.HintSize="186,113">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <av:Point x:Key="ShapeLocation">267,423.5</av:Point>
+            <av:Size x:Key="ShapeSize">186,113</av:Size>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+            <x:Double x:Key="StateContainerWidth">172</x:Double>
+            <x:Double x:Key="StateContainerHeight">77.039999999999964</x:Double>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Transition_4" sap:VirtualizedContainerService.HintSize="430,505">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Int32 x:Key="SrcConnectionPointIndex">39</x:Int32>
+            <x:Int32 x:Key="DestConnectionPointIndex">34</x:Int32>
+            <av:PointCollection x:Key="ConnectorLocation">370,331.5 370,361.5 350.7,361.5 350.7,423.5</av:PointCollection>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="MessageBox_4" sap:VirtualizedContainerService.HintSize="314,59" />
+      <sap2010:ViewStateData Id="Transition_6" sap:VirtualizedContainerService.HintSize="430,505">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <av:PointCollection x:Key="ConnectorLocation">462.5,290.3 525.947395826991,290.3 525.947395826991,105.25 427,105.25</av:PointCollection>
+            <x:Int32 x:Key="SrcConnectionPointIndex">44</x:Int32>
+            <x:Int32 x:Key="DestConnectionPointIndex">56</x:Int32>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="State_4" sap:VirtualizedContainerService.HintSize="185,103">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <av:Point x:Key="ShapeLocation">277.5,228.5</av:Point>
+            <av:Size x:Key="ShapeSize">185,103</av:Size>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+            <x:Double x:Key="StateContainerWidth">171</x:Double>
+            <x:Double x:Key="StateContainerHeight">67.04000000000002</x:Double>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Transition_5" sap:VirtualizedContainerService.HintSize="456,851">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Int32 x:Key="SrcConnectionPointIndex">35</x:Int32>
+            <x:Int32 x:Key="DestConnectionPointIndex">38</x:Int32>
+            <av:PointCollection x:Key="ConnectorLocation">364.3,120.5 364.3,150.5 370,150.5 370,228.5</av:PointCollection>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="State_1" sap:VirtualizedContainerService.HintSize="114,61">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <av:Point x:Key="ShapeLocation">313,59.5</av:Point>
+            <av:Size x:Key="ShapeSize">114,61</av:Size>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="StateMachine_1" sap:VirtualizedContainerService.HintSize="882,958">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+            <av:Point x:Key="ShapeLocation">60,52.5</av:Point>
+            <x:Double x:Key="StateContainerWidth">868</x:Double>
+            <x:Double x:Key="StateContainerHeight">921.54</x:Double>
+            <av:PointCollection x:Key="ConnectorLocation">120,97.5 150,97.5 150,99.15 313,99.15</av:PointCollection>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Sequence_1" sap:VirtualizedContainerService.HintSize="222,175">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Main_1" sap:VirtualizedContainerService.HintSize="262,255" />
+    </sap2010:ViewStateManager>
+  </sap2010:WorkflowViewState.ViewStateManager>
+</Activity>
