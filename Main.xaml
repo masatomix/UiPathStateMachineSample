@@ -60,42 +60,55 @@
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
   <Sequence DisplayName="シーケンス" sap2010:WorkflowViewState.IdRef="Sequence_1">
-    <StateMachine InitialState="{x:Reference __ReferenceID1}" DisplayName="ステートマシン" sap2010:WorkflowViewState.IdRef="StateMachine_1">
-      <State x:Name="__ReferenceID1" DisplayName="ステート" sap2010:WorkflowViewState.IdRef="State_2">
-        <State.Entry>
-          <Assign DisplayName="代入" sap2010:WorkflowViewState.IdRef="Assign_1">
-            <Assign.To>
-              <OutArgument x:TypeArguments="x:Int32">[RandomNumber]</OutArgument>
-            </Assign.To>
-            <Assign.Value>
-              <InArgument x:TypeArguments="x:Int32">[New Random().next(1,100)]</InArgument>
-            </Assign.Value>
-          </Assign>
-        </State.Entry>
-        <State.Transitions>
-          <Transition DisplayName="T1" sap2010:WorkflowViewState.IdRef="Transition_1">
-            <Transition.To>
-              <State x:Name="__ReferenceID0" DisplayName="最終ステート" sap2010:WorkflowViewState.IdRef="State_1" IsFinal="True">
-                <State.Entry>
-                  <ui:MessageBox Caption="{x:Null}" ChosenButton="{x:Null}" Buttons="Ok" DisplayName="メッセージボックス" Text="[&quot;正常終了：&quot; + RandomNumber.ToString]" TopMost="True" sap2010:WorkflowViewState.IdRef="MessageBox_1" />
-                </State.Entry>
-              </State>
-            </Transition.To>
-          </Transition>
-        </State.Transitions>
-      </State>
+    <StateMachine DisplayName="ステートマシン" sap2010:WorkflowViewState.IdRef="StateMachine_1">
+      <StateMachine.InitialState>
+        <State x:Name="__ReferenceID0" DisplayName="ステート" sap2010:WorkflowViewState.IdRef="State_2">
+          <State.Entry>
+            <Assign DisplayName="代入" sap2010:WorkflowViewState.IdRef="Assign_1">
+              <Assign.To>
+                <OutArgument x:TypeArguments="x:Int32">[RandomNumber]</OutArgument>
+              </Assign.To>
+              <Assign.Value>
+                <InArgument x:TypeArguments="x:Int32">[New Random().next(1,100)]</InArgument>
+              </Assign.Value>
+            </Assign>
+          </State.Entry>
+          <State.Transitions>
+            <Transition DisplayName="T1" sap2010:WorkflowViewState.IdRef="Transition_1" Condition="[RandomNumber mod 2 &lt;&gt; 0]">
+              <Transition.To>
+                <State x:Name="__ReferenceID1" DisplayName="最終ステート" sap2010:WorkflowViewState.IdRef="State_1" IsFinal="True">
+                  <State.Entry>
+                    <ui:MessageBox Caption="{x:Null}" ChosenButton="{x:Null}" Buttons="Ok" DisplayName="メッセージボックス" sap2010:WorkflowViewState.IdRef="MessageBox_1" Text="[&quot;正常終了：&quot; + RandomNumber.ToString]" TopMost="True" />
+                  </State.Entry>
+                </State>
+              </Transition.To>
+            </Transition>
+            <Transition DisplayName="T2" sap2010:WorkflowViewState.IdRef="Transition_3" Condition="[RandomNumber mod 2 = 0]">
+              <Transition.To>
+                <State x:Name="__ReferenceID2" DisplayName="偶数エラー" sap2010:WorkflowViewState.IdRef="State_4" IsFinal="True">
+                  <State.Entry>
+                    <ui:MessageBox Caption="{x:Null}" ChosenButton="{x:Null}" Buttons="Ok" DisplayName="メッセージボックス" sap2010:WorkflowViewState.IdRef="MessageBox_3" Text="[&quot;偶数エラー！！！：&quot; + RandomNumber.ToString]" TopMost="True" />
+                  </State.Entry>
+                </State>
+              </Transition.To>
+            </Transition>
+          </State.Transitions>
+        </State>
+      </StateMachine.InitialState>
       <x:Reference>__ReferenceID0</x:Reference>
+      <x:Reference>__ReferenceID1</x:Reference>
+      <x:Reference>__ReferenceID2</x:Reference>
       <StateMachine.Variables>
         <Variable x:TypeArguments="x:Int32" Name="RandomNumber" />
       </StateMachine.Variables>
     </StateMachine>
-    <sads:DebugSymbol.Symbol>dylWOlxnaXRcVWlQYXRoU3RhdGVNYWNoaW5lU2FtcGxlXE1haW4ueGFtbAk+A10OAgEBPwVbFAIBAkAHVg8CAQhOD1IXAgEDQgtJFAIBC1ATUOUBAgEFRzVHTwIBDkQ2REQCAQxQd1CkAQIBBg==</sads:DebugSymbol.Symbol>
+    <sads:DebugSymbol.Symbol>dylWOlxnaXRcVWlQYXRoU3RhdGVNYWNoaW5lU2FtcGxlXE1haW4ueGFtbA4+A2oOAgEBPwVoFAIBAkEJYBECAQ1PEVMZAgEIWBFcGQIBA0MNShYCARRNY02EAQIBEVZjVn0CAQ9RFVHnAQIBCloVWusBAgEFSDdIUQIBF0U4RUYCARVRqAFR1QECAQtaqAFa2QECAQY=</sads:DebugSymbol.Symbol>
   </Sequence>
   <sap2010:WorkflowViewState.ViewStateManager>
     <sap2010:ViewStateManager>
       <sap2010:ViewStateData Id="Assign_1" sap:VirtualizedContainerService.HintSize="242,60" />
       <sap2010:ViewStateData Id="MessageBox_1" sap:VirtualizedContainerService.HintSize="314,59" />
-      <sap2010:ViewStateData Id="State_1" sap:VirtualizedContainerService.HintSize="340,224">
+      <sap2010:ViewStateData Id="State_1" sap:VirtualizedContainerService.HintSize="114,61">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <av:Point x:Key="ShapeLocation">243,289.5</av:Point>
@@ -110,6 +123,25 @@
             <av:PointCollection x:Key="ConnectorLocation">294.3,210.5 294.3,289.5</av:PointCollection>
             <x:Int32 x:Key="SrcConnectionPointIndex">35</x:Int32>
             <x:Int32 x:Key="DestConnectionPointIndex">34</x:Int32>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="MessageBox_3" sap:VirtualizedContainerService.HintSize="314,59" />
+      <sap2010:ViewStateData Id="State_4" sap:VirtualizedContainerService.HintSize="340,223">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <av:Point x:Key="ShapeLocation">73,289.5</av:Point>
+            <av:Size x:Key="ShapeSize">114,61</av:Size>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Transition_3" sap:VirtualizedContainerService.HintSize="430,505">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <av:PointCollection x:Key="ConnectorLocation">277.2,210.5 277.2,240.5 135.7,240.5 135.7,289.5</av:PointCollection>
+            <x:Int32 x:Key="SrcConnectionPointIndex">23</x:Int32>
+            <x:Int32 x:Key="DestConnectionPointIndex">42</x:Int32>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
