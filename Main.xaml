@@ -62,33 +62,45 @@
   <Sequence DisplayName="シーケンス" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <StateMachine DisplayName="ステートマシン" sap2010:WorkflowViewState.IdRef="StateMachine_1">
       <StateMachine.InitialState>
-        <State x:Name="__ReferenceID0" DisplayName="ステート" sap2010:WorkflowViewState.IdRef="State_2">
-          <State.Entry>
-            <Assign DisplayName="代入" sap2010:WorkflowViewState.IdRef="Assign_1">
-              <Assign.To>
-                <OutArgument x:TypeArguments="x:Int32">[RandomNumber]</OutArgument>
-              </Assign.To>
-              <Assign.Value>
-                <InArgument x:TypeArguments="x:Int32">[New Random().next(1,100)]</InArgument>
-              </Assign.Value>
-            </Assign>
-          </State.Entry>
+        <State x:Name="__ReferenceID0" DisplayName="初期" sap2010:WorkflowViewState.IdRef="State_9">
           <State.Transitions>
-            <Transition DisplayName="T1" sap2010:WorkflowViewState.IdRef="Transition_1" Condition="[RandomNumber mod 2 &lt;&gt; 0]">
+            <Transition DisplayName="T1" sap2010:WorkflowViewState.IdRef="Transition_7">
+              <Transition.Trigger>
+                <ui:MonitorEvents ContinueOnError="{x:Null}" DisplayName="イベントを監視" sap2010:WorkflowViewState.IdRef="MonitorEvents_3" RepeatForever="False">
+                  <ui:MonitorEvents.Handler>
+                    <ActivityAction x:TypeArguments="x:Object">
+                      <ActivityAction.Argument>
+                        <DelegateInArgument x:TypeArguments="x:Object" Name="args" />
+                      </ActivityAction.Argument>
+                      <Sequence DisplayName="イベントハンドラー" sap2010:WorkflowViewState.IdRef="Sequence_4">
+                        <ui:ReadTextFile Content="[TriggerData]" DisplayName="テキストファイルを読み込む" FileName="[System.IO.Path.Combine(Path,TriggerFile)]" sap2010:WorkflowViewState.IdRef="ReadTextFile_3" />
+                      </Sequence>
+                    </ActivityAction>
+                  </ui:MonitorEvents.Handler>
+                  <ui:MonitorEvents.Triggers>
+                    <ui:FileChangeTrigger ChangeType="Changed" DisplayName="ファイル変更トリガー" FileName="[TriggerFile]" sap2010:WorkflowViewState.IdRef="FileChangeTrigger_3" IncludeSubdirectories="False" NotifyFilters="Size" Path="[Path]" />
+                  </ui:MonitorEvents.Triggers>
+                </ui:MonitorEvents>
+              </Transition.Trigger>
               <Transition.To>
-                <State x:Name="__ReferenceID1" DisplayName="最終ステート" sap2010:WorkflowViewState.IdRef="State_1" IsFinal="True">
+                <State x:Name="__ReferenceID1" DisplayName="メイン処理" sap2010:WorkflowViewState.IdRef="State_8">
                   <State.Entry>
-                    <ui:MessageBox Caption="{x:Null}" ChosenButton="{x:Null}" Buttons="Ok" DisplayName="メッセージボックス" sap2010:WorkflowViewState.IdRef="MessageBox_1" Text="[&quot;正常終了：&quot; + RandomNumber.ToString]" TopMost="True" />
+                    <Sequence DisplayName="シーケンス" sap2010:WorkflowViewState.IdRef="Sequence_6">
+                      <ui:ReadTextFile Content="[result]" DisplayName="テキストファイルを読み込む" FileName="[System.IO.Path.Combine(Path,&quot;data.txt&quot;)]" sap2010:WorkflowViewState.IdRef="ReadTextFile_5" />
+                      <ui:MessageBox Caption="{x:Null}" ChosenButton="{x:Null}" Buttons="Ok" DisplayName="メッセージボックス" sap2010:WorkflowViewState.IdRef="MessageBox_7" Text="[result]" TopMost="True" />
+                    </Sequence>
                   </State.Entry>
-                </State>
-              </Transition.To>
-            </Transition>
-            <Transition DisplayName="T2" sap2010:WorkflowViewState.IdRef="Transition_3" Condition="[RandomNumber mod 2 = 0]">
-              <Transition.To>
-                <State x:Name="__ReferenceID2" DisplayName="偶数エラー" sap2010:WorkflowViewState.IdRef="State_4" IsFinal="True">
-                  <State.Entry>
-                    <ui:MessageBox Caption="{x:Null}" ChosenButton="{x:Null}" Buttons="Ok" DisplayName="メッセージボックス" sap2010:WorkflowViewState.IdRef="MessageBox_3" Text="[&quot;偶数エラー！！！：&quot; + RandomNumber.ToString]" TopMost="True" />
-                  </State.Entry>
+                  <State.Transitions>
+                    <Transition DisplayName="T2" sap2010:WorkflowViewState.IdRef="Transition_5" Condition="[&quot;end&quot;.Equals(TriggerData)]">
+                      <Transition.To>
+                        <State x:Name="__ReferenceID2" DisplayName="終了" sap2010:WorkflowViewState.IdRef="State_7" IsFinal="True" />
+                      </Transition.To>
+                    </Transition>
+                    <Transition DisplayName="T3" sap2010:WorkflowViewState.IdRef="Transition_6" To="{x:Reference __ReferenceID0}" Condition="[not &quot;end&quot;.Equals(TriggerData)]" />
+                  </State.Transitions>
+                  <State.Variables>
+                    <Variable x:TypeArguments="x:String" Name="result" />
+                  </State.Variables>
                 </State>
               </Transition.To>
             </Transition>
@@ -99,56 +111,83 @@
       <x:Reference>__ReferenceID1</x:Reference>
       <x:Reference>__ReferenceID2</x:Reference>
       <StateMachine.Variables>
-        <Variable x:TypeArguments="x:Int32" Name="RandomNumber" />
+        <Variable x:TypeArguments="x:String" Default="c:/temp/" Name="Path" />
+        <Variable x:TypeArguments="x:String" Default="data.trg" Name="TriggerFile" />
+        <Variable x:TypeArguments="x:String" Name="TriggerData" />
       </StateMachine.Variables>
     </StateMachine>
-    <sads:DebugSymbol.Symbol>dylWOlxnaXRcVWlQYXRoU3RhdGVNYWNoaW5lU2FtcGxlXE1haW4ueGFtbA4+A2oOAgEBPwVoFAIBAkEJYBECAQ1PEVMZAgEIWBFcGQIBA0MNShYCARRNY02EAQIBEVZjVn0CAQ9RFVHnAQIBCloVWusBAgEFSDdIUQIBF0U4RUYCARVRqAFR1QECAQtaqAFa2QECAQY=</sads:DebugSymbol.Symbol>
+    <sads:DebugSymbol.Symbol>dylWOlxnaXRcVWlQYXRoU3RhdGVNYWNoaW5lU2FtcGxlXE1haW4ueGFtbBg+A3gOAgEBPwV2FAIBAnI2ckACASZzNnNAAgElQQlsEQIBFVYRaBkCAQVgGWCEAQIBA0URUyQCARdYFVsgAgEMXmtekgECAQljjQFjuAECAQdFlAFFmwECASRRFVHrAQIBH0sXTSICARhZF1nJAQIBEFoXWsYBAgENUWJRcQIBIlHgAVHoAQIBIEwZTMcBAgEZWWBZlQECARNZMFk6AgERWqoBWrQBAgEOTGdMkwECARxMMkxBAgEa</sads:DebugSymbol.Symbol>
   </Sequence>
   <sap2010:WorkflowViewState.ViewStateManager>
     <sap2010:ViewStateManager>
-      <sap2010:ViewStateData Id="Assign_1" sap:VirtualizedContainerService.HintSize="242,60" />
-      <sap2010:ViewStateData Id="MessageBox_1" sap:VirtualizedContainerService.HintSize="314,59" />
-      <sap2010:ViewStateData Id="State_1" sap:VirtualizedContainerService.HintSize="114,61">
+      <sap2010:ViewStateData Id="ReadTextFile_3" sap:VirtualizedContainerService.HintSize="314,59" />
+      <sap2010:ViewStateData Id="Sequence_4" sap:VirtualizedContainerService.HintSize="336,183">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <av:Point x:Key="ShapeLocation">243,289.5</av:Point>
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="FileChangeTrigger_3" sap:VirtualizedContainerService.HintSize="200,40" />
+      <sap2010:ViewStateData Id="MonitorEvents_3" sap:VirtualizedContainerService.HintSize="414,307" />
+      <sap2010:ViewStateData Id="ReadTextFile_5" sap:VirtualizedContainerService.HintSize="314,59" />
+      <sap2010:ViewStateData Id="MessageBox_7" sap:VirtualizedContainerService.HintSize="314,59" />
+      <sap2010:ViewStateData Id="Sequence_6" sap:VirtualizedContainerService.HintSize="336,282">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="State_7" sap:VirtualizedContainerService.HintSize="114,61">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <av:Point x:Key="ShapeLocation">63,399.5</av:Point>
             <av:Size x:Key="ShapeSize">114,61</av:Size>
             <x:Boolean x:Key="IsPinned">False</x:Boolean>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="Transition_1" sap:VirtualizedContainerService.HintSize="430,505">
+      <sap2010:ViewStateData Id="Transition_5" sap:VirtualizedContainerService.HintSize="430,505">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <av:PointCollection x:Key="ConnectorLocation">294.3,210.5 294.3,289.5</av:PointCollection>
+            <av:PointCollection x:Key="ConnectorLocation">114.3,320.5 114.3,350.5 102.9,350.5 102.9,399.5</av:PointCollection>
             <x:Int32 x:Key="SrcConnectionPointIndex">35</x:Int32>
+            <x:Int32 x:Key="DestConnectionPointIndex">26</x:Int32>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Transition_6" sap:VirtualizedContainerService.HintSize="430,505">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <av:PointCollection x:Key="ConnectorLocation">177,293.05 207,293.05 207,160 177,160</av:PointCollection>
+            <x:Int32 x:Key="SrcConnectionPointIndex">40</x:Int32>
+            <x:Int32 x:Key="DestConnectionPointIndex">36</x:Int32>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="State_8" sap:VirtualizedContainerService.HintSize="114,61">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <av:Point x:Key="ShapeLocation">63,259.5</av:Point>
+            <av:Size x:Key="ShapeSize">114,61</av:Size>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Transition_7" sap:VirtualizedContainerService.HintSize="456,752">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <av:PointCollection x:Key="ConnectorLocation">125.7,190.5 125.7,220.5 114.3,220.5 114.3,259.5</av:PointCollection>
+            <x:Int32 x:Key="SrcConnectionPointIndex">43</x:Int32>
             <x:Int32 x:Key="DestConnectionPointIndex">34</x:Int32>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="MessageBox_3" sap:VirtualizedContainerService.HintSize="314,59" />
-      <sap2010:ViewStateData Id="State_4" sap:VirtualizedContainerService.HintSize="340,223">
+      <sap2010:ViewStateData Id="State_9" sap:VirtualizedContainerService.HintSize="114,61">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <av:Point x:Key="ShapeLocation">73,289.5</av:Point>
-            <av:Size x:Key="ShapeSize">114,61</av:Size>
-            <x:Boolean x:Key="IsPinned">False</x:Boolean>
-          </scg:Dictionary>
-        </sap:WorkflowViewStateService.ViewState>
-      </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="Transition_3" sap:VirtualizedContainerService.HintSize="430,505">
-        <sap:WorkflowViewStateService.ViewState>
-          <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <av:PointCollection x:Key="ConnectorLocation">277.2,210.5 277.2,240.5 135.7,240.5 135.7,289.5</av:PointCollection>
-            <x:Int32 x:Key="SrcConnectionPointIndex">23</x:Int32>
-            <x:Int32 x:Key="DestConnectionPointIndex">42</x:Int32>
-          </scg:Dictionary>
-        </sap:WorkflowViewStateService.ViewState>
-      </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="State_2" sap:VirtualizedContainerService.HintSize="114,61">
-        <sap:WorkflowViewStateService.ViewState>
-          <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <av:Point x:Key="ShapeLocation">243,149.5</av:Point>
+            <av:Point x:Key="ShapeLocation">63,129.5</av:Point>
             <av:Size x:Key="ShapeSize">114,61</av:Size>
             <x:Boolean x:Key="IsPinned">False</x:Boolean>
           </scg:Dictionary>
@@ -157,22 +196,23 @@
       <sap2010:ViewStateData Id="StateMachine_1" sap:VirtualizedContainerService.HintSize="614,636">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
-            <av:Point x:Key="ShapeLocation">270,2.5</av:Point>
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <av:Point x:Key="ShapeLocation">80,2.5</av:Point>
             <x:Double x:Key="StateContainerWidth">600</x:Double>
             <x:Double x:Key="StateContainerHeight">600</x:Double>
-            <av:PointCollection x:Key="ConnectorLocation">300,77.5 300,149.5</av:PointCollection>
+            <av:PointCollection x:Key="ConnectorLocation">119,77.5 119,107.5 114.3,107.5 114.3,129.5</av:PointCollection>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="Sequence_1" sap:VirtualizedContainerService.HintSize="222,175">
+      <sap2010:ViewStateData Id="Sequence_1" sap:VirtualizedContainerService.HintSize="636,760">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="Main_1" sap:VirtualizedContainerService.HintSize="262,255" />
+      <sap2010:ViewStateData Id="Main_1" sap:VirtualizedContainerService.HintSize="676,840" />
     </sap2010:ViewStateManager>
   </sap2010:WorkflowViewState.ViewStateManager>
 </Activity>
